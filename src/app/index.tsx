@@ -1,6 +1,6 @@
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
-import { Image, ImageBackground, Text, TouchableOpacity, View } from "react-native";
+import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function Index() {
   return (
@@ -15,27 +15,31 @@ export default function Index() {
       resizeMode="cover"
     >
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center", width: "100%" }}>
-        <Image
+        
+		<Image
           source={require("../assets/images/icon2.png")}
-          style={{ width: 100, height: 100, marginBottom: 20 }}
+          style={{ width: 100, marginBottom: 20 }}
         />
         
-        <LinearGradient
-          colors={["#66C17E", "#E6FFED"]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          style={{ padding: 15, borderRadius: 10, marginBottom: 15 }}
-        >
-          <Text 
-            style={{ fontFamily: "Poppins_700Bold" }} 
-            className="text-2xl text-center"
-          >
-            Agende sua limpeza {`\n`}
-            em minutos
-          </Text>
-        </LinearGradient>
+       <MaskedView
+      maskElement={
+        <Text style={styles.text}>
+          Agende sua limpeza {"\n"} em minutos
+        </Text>
+      }
+    >
+      <LinearGradient
+        colors={["#66C17E", "#E6FFED"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+      >
+        <Text style={[styles.text, { opacity: 0 }]}>
+          Agende sua limpeza {"\n"} em minutos
+        </Text>
+      </LinearGradient>
+    </MaskedView>
 
-        <Text className="text-center text-gray-600 mb-10">
+        <Text className="text-center text-white mb-10">
           Prático, rápido e do jeito que {`\n`}
           você precisa.
         </Text>
@@ -93,3 +97,11 @@ export default function Index() {
     </ImageBackground>
   );
 }
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize: 26,
+    fontFamily: "Poppins_700Bold",
+    textAlign: "center",
+  },
+});
