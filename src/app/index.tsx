@@ -2,106 +2,171 @@ import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
 import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-export default function Index() {
+export default function Onboarding() {
   return (
     <ImageBackground
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        padding: 20
-      }}
+      style={styles.background}
       source={require("../assets/images/background-onboarding.png")}
       resizeMode="cover"
     >
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", width: "100%" }}>
-        
-		<Image
+      <View style={styles.container}>
+        {/* Logo */}
+        <Image
           source={require("../assets/images/icon2.png")}
-          style={{ width: 100, marginBottom: 20 }}
+          style={styles.logo}
+          resizeMode="contain"
         />
         
-       <MaskedView
-      maskElement={
-        <Text style={styles.text}>
-          Agende sua limpeza {"\n"} em minutos
-        </Text>
-      }
-    >
-      <LinearGradient
-        colors={["#66C17E", "#E6FFED"]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-      >
-        <Text style={[styles.text, { opacity: 0 }]}>
-          Agende sua limpeza {"\n"} em minutos
-        </Text>
-      </LinearGradient>
-    </MaskedView>
+        {/* Título com gradiente */}
+        <MaskedView
+          maskElement={
+            <Text style={styles.title}>
+              Agende sua limpeza {"\n"} em minutos
+            </Text>
+          }
+        >
+          <LinearGradient
+            colors={["#65BF7A", "#E6FFED"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+          >
+            <Text style={[styles.title, { opacity: 0 }]}>
+              Agende sua limpeza {"\n"} em minutos
+            </Text>
+          </LinearGradient>
+        </MaskedView>
 
-        <Text className="text-center text-white mb-10">
-          Prático, rápido e do jeito que {`\n`}
+        {/* Subtítulo */}
+        <Text style={styles.subtitle}>
+          Prático, rápido e do jeito que {"\n"}
           você precisa.
         </Text>
 
-        {/* Botão ENTRAR com gradiente */}
-        <TouchableOpacity style={{ width: "100%", marginBottom: 15 }}>
-          <LinearGradient
-            colors={["#66C17E", "#4DADA7", "#3498D0"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            style={{
-              paddingVertical: 15,
-              paddingHorizontal: 30,
-              borderRadius: 25,
-              alignItems: "center"
-            }}
-          >
-            <Text style={{ color: "white", fontSize: 16, fontWeight: "bold" }}>
-              ENTRAR
-            </Text>
-          </LinearGradient>
-        </TouchableOpacity>
-
-        {/* Botão CRIAR CONTA com texto em gradiente e fundo branco */}
-        <TouchableOpacity 
-          style={{ 
-            width: "100%", 
-            backgroundColor: "white", 
-            paddingVertical: 15,
-            paddingHorizontal: 30,
-            borderRadius: 25,
-            alignItems: "center"
-          }}
-        >
-          <MaskedView
-            maskElement={
-              <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-                CRIAR CONTA
-              </Text>
-            }
+        {/* Botões */}
+        <View style={styles.buttonsContainer}>
+          {/* Botão ENTRAR com gradiente */}
+          <TouchableOpacity 
+            style={styles.button}
+            activeOpacity={0.8}
           >
             <LinearGradient
-              colors={["#66C17E", "#4DADA7", "#3498D0"]}
+              colors={["#65BF7A", "#39B2A7", "#3290CD"]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
-              style={{ paddingVertical: 3 }}
+              style={styles.gradientButton}
             >
-              <Text style={{ fontSize: 16, fontWeight: "bold", opacity: 0 }}>
-                CRIAR CONTA
+              <Text style={styles.buttonTextWhite}>
+                ENTRAR
               </Text>
             </LinearGradient>
-          </MaskedView>
-        </TouchableOpacity>
+          </TouchableOpacity>
+
+          {/* Botão CRIAR CONTA com texto em gradiente e fundo branco */}
+          <TouchableOpacity 
+            style={styles.buttonWhite}
+            activeOpacity={0.8}
+          >
+            <MaskedView
+              maskElement={
+                <Text style={styles.buttonTextGradient}>
+                  CRIAR CONTA
+                </Text>
+              }
+            >
+              <LinearGradient
+                colors={["#65BF7A", "#39B2A7", "#3290CD"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+              >
+                <Text style={[styles.buttonTextGradient, { opacity: 0 }]}>
+                  CRIAR CONTA
+                </Text>
+              </LinearGradient>
+            </MaskedView>
+          </TouchableOpacity>
+        </View>
       </View>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 26,
+  background: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    paddingHorizontal: 24,
+  },
+  logo: {
+    width: 180,
+    height: 120,
+    marginBottom: 32,
+  },
+  title: {
+    fontSize: 32,
     fontFamily: "Poppins_700Bold",
     textAlign: "center",
+    marginBottom: 16,
+    lineHeight: 40,
+  },
+  subtitle: {
+    fontSize: 16,
+    fontFamily: "Poppins_400Regular",
+    textAlign: "center",
+    color: "#FFFFFF",
+    marginBottom: 48,
+    lineHeight: 24,
+    opacity: 0.95,
+  },
+  buttonsContainer: {
+    width: "100%",
+    gap: 16,
+  },
+  button: {
+    width: "100%",
+    borderRadius: 28,
+    overflow: "hidden",
+    elevation: 4,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+  },
+  gradientButton: {
+    paddingVertical: 18,
+    paddingHorizontal: 32,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  buttonWhite: {
+    width: "100%",
+    backgroundColor: "#FFFFFF",
+    paddingVertical: 18,
+    paddingHorizontal: 32,
+    borderRadius: 28,
+    alignItems: "center",
+    justifyContent: "center",
+    elevation: 4,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+  },
+  buttonTextWhite: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontFamily: "Poppins_700Bold",
+    letterSpacing: 1,
+  },
+  buttonTextGradient: {
+    fontSize: 16,
+    fontFamily: "Poppins_700Bold",
+    letterSpacing: 1,
   },
 });
