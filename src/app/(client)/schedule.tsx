@@ -453,7 +453,8 @@ export default function SchedulePage() {
                 colors={["#65BF7A", "#39B2A7"]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
-                className="p-4 rounded-2xl"
+                className="p-4"
+                style={{ borderRadius: 50 }}
               >
                 <View className="flex-row items-center justify-center">
                   <Feather name="check-circle" size={24} color="#FFFFFF" />

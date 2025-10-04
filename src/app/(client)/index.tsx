@@ -110,7 +110,8 @@ export default function HomePage() {
         colors={item.color as any}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        className="rounded-2xl p-6 mx-2"
+        className="p-6 mx-2"
+        style={{ borderRadius: 16 }}
       >
         <View className="flex-row justify-between items-center">
           <View className="flex-1">
@@ -139,7 +140,7 @@ export default function HomePage() {
       onPress={() => router.push("/(client)/schedule")}
     >
       <View className="w-12 h-12 bg-gradient-to-r from-[#65BF7A] to-[#39B2A7] rounded-xl items-center justify-center mb-3">
-        <Feather name={item.icon as any} size={20} color="#FFFFFF" />
+        <Feather name={item.icon as any} size={20} />
       </View>
       <Text className="text-gray-800 text-sm font-semibold mb-1" numberOfLines={2}>
         {item.name}
@@ -273,7 +274,7 @@ export default function HomePage() {
                 onPress={() => router.push("/(client)/my-orders")}
               >
                 <View className="w-10 h-10 bg-gradient-to-r from-[#65BF7A] to-[#39B2A7] rounded-xl items-center justify-center mb-3">
-                  <Feather name="clipboard" size={18} color="#FFFFFF" />
+                  <Feather name="clipboard" size={18} />
                 </View>
                 <Text className="text-gray-800 text-sm font-semibold mb-1">
                   Meus Pedidos
@@ -288,7 +289,7 @@ export default function HomePage() {
                 onPress={() => router.push("/(client)/settings")}
               >
                 <View className="w-10 h-10 bg-gradient-to-r from-[#65BF7A] to-[#39B2A7] rounded-xl items-center justify-center mb-3">
-                  <Feather name="user" size={18} color="#FFFFFF" />
+                  <Feather name="user" size={18} />
                 </View>
                 <Text className="text-gray-800 text-sm font-semibold mb-1">
                   Meu Perfil

@@ -400,7 +400,7 @@ export default function MyOrdersPage() {
           <View className="bg-white/95 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border border-white/20 mb-6">
             <View className="items-center">
               <View className="w-16 h-16 bg-gradient-to-r from-[#65BF7A] to-[#39B2A7] rounded-2xl items-center justify-center mb-4">
-                <Feather name="calendar" size={28} color="#FFFFFF" />
+                <Feather name="calendar" size={28} />
               </View>
               <Text className="text-gray-800 text-lg font-bold mb-2 text-center">
                 Precisa de uma nova limpeza?
@@ -416,7 +416,8 @@ export default function MyOrdersPage() {
                   colors={["#65BF7A", "#39B2A7"]}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 0 }}
-                  className="px-4 py-2 rounded-xl"
+                  style={{ borderRadius: 16 }}
+                  className="px-4 py-2"
                 >
                   <Text className="text-white font-bold text-center">
                     Agendar Novo Serviço
