@@ -242,7 +242,7 @@ export default function EmployeeProfilePage() {
       <View className="flex-row items-center justify-between mb-3">
         <View className="flex-row items-center flex-1">
           <View className="w-10 h-10 bg-gradient-to-r from-[#65BF7A] to-[#39B2A7] rounded-xl items-center justify-center mr-3">
-            <Feather name={item.icon as any} size={18} color="#FFFFFF" />
+            <Feather name={item.icon as any} size={18} />
           </View>
           <View className="flex-1">
             <Text className="text-gray-800 text-sm font-bold" numberOfLines={1}>
@@ -271,13 +271,13 @@ export default function EmployeeProfilePage() {
 
       <View className="mb-2">
         <Text className="text-gray-600 text-xs" numberOfLines={1}>
-          👤 {item.clientName}
+          {item.clientName}
         </Text>
         <Text className="text-gray-600 text-xs" numberOfLines={1}>
-          📍 {item.address}
+          {item.address}
         </Text>
         <Text className="text-gray-600 text-xs">
-          ⏱️ {item.duration}
+          {item.duration}
         </Text>
       </View>
 
@@ -356,7 +356,7 @@ export default function EmployeeProfilePage() {
             <View className="flex-row items-center justify-between mb-4">
               <View className="flex-1">
                 <Text className="text-white text-2xl font-bold mb-1">
-                  Meu Perfil 👤
+                  Meu Perfil
                 </Text>
                 <Text className="text-white/80 text-sm">
                   Histórico e avaliações
@@ -480,7 +480,7 @@ export default function EmployeeProfilePage() {
                   Estatísticas Detalhadas
                 </Text>
                 
-                <View className="space-y-3">
+                <View className="gap-3">
                   <View className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 shadow-lg border border-white/20">
                     <View className="flex-row items-center justify-between">
                       <View className="flex-row items-center">
@@ -648,18 +648,18 @@ export default function EmployeeProfilePage() {
                       </Text>
                     </View>
                     
-                    <View className="space-y-2">
+                    <View className="gap-2">
                       <Text className="text-gray-600 text-sm">
-                        👤 Cliente: {selectedService.clientName}
+                        Cliente: {selectedService.clientName}
                       </Text>
                       <Text className="text-gray-600 text-sm">
-                        📍 Local: {selectedService.address}
+                        Local: {selectedService.address}
                       </Text>
                       <Text className="text-gray-600 text-sm">
-                        📅 Data: {new Date(selectedService.date).toLocaleDateString('pt-BR')}
+                        Data: {new Date(selectedService.date).toLocaleDateString('pt-BR')}
                       </Text>
                       <Text className="text-gray-600 text-sm">
-                        ⏱️ Duração: {selectedService.duration}
+                        Duração: {selectedService.duration}
                       </Text>
                     </View>
                   </View>

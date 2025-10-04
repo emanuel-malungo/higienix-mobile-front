@@ -269,7 +269,7 @@ export default function EmployeeDashboard() {
       <View className="flex-row items-center justify-between mb-3">
         <View className="flex-row items-center">
           <View className="w-10 h-10 bg-gradient-to-r from-[#65BF7A] to-[#39B2A7] rounded-xl items-center justify-center mr-3">
-            <Feather name={item.icon as any} size={18} color="#FFFFFF" />
+            <Feather name={item.icon as any} size={18}  />
           </View>
           <View className="flex-1">
             <Text className="text-gray-800 text-sm font-bold" numberOfLines={1}>
@@ -291,13 +291,13 @@ export default function EmployeeDashboard() {
       {/* Informações do cliente */}
       <View className="mb-3">
         <Text className="text-gray-800 text-sm font-semibold mb-1">
-          👤 {item.clientName}
+          {item.clientName}
         </Text>
         <Text className="text-gray-600 text-xs mb-1" numberOfLines={2}>
-          📍 {item.address}
+          {item.address}
         </Text>
         <Text className="text-gray-600 text-xs">
-          🕐 {item.date} às {item.time} ({item.estimatedDuration})
+          {item.date} às {item.time} ({item.estimatedDuration})
         </Text>
       </View>
 
@@ -433,7 +433,7 @@ export default function EmployeeDashboard() {
                   </Text>
                 </View>
                 <View className="w-16 h-16 bg-gradient-to-r from-[#65BF7A] to-[#39B2A7] rounded-2xl items-center justify-center ml-4">
-                  <Feather name="activity" size={28} color="#FFFFFF" />
+                  <Feather name="activity" size={28} />
                 </View>
               </View>
             </View>
@@ -501,7 +501,7 @@ export default function EmployeeDashboard() {
                 className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 flex-1 mr-2 shadow-lg border border-white/20"
               >
                 <View className="w-10 h-10 bg-gradient-to-r from-[#65BF7A] to-[#39B2A7] rounded-xl items-center justify-center mb-3">
-                  <Feather name="calendar" size={18} color="#FFFFFF" />
+                  <Feather name="calendar" size={18}  />
                 </View>
                 <Text className="text-gray-800 text-sm font-semibold mb-1">
                   Minha Agenda
@@ -515,7 +515,7 @@ export default function EmployeeDashboard() {
                 className="bg-white/95 backdrop-blur-lg rounded-2xl p-4 flex-1 ml-2 shadow-lg border border-white/20"
               >
                 <View className="w-10 h-10 bg-gradient-to-r from-[#65BF7A] to-[#39B2A7] rounded-xl items-center justify-center mb-3">
-                  <Feather name="user" size={18} color="#FFFFFF" />
+                  <Feather name="user" size={18}  />
                 </View>
                 <Text className="text-gray-800 text-sm font-semibold mb-1">
                   Meu Perfil

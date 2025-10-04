@@ -67,7 +67,7 @@ export default function Onboarding() {
           <TouchableOpacity 
             className="w-full bg-white py-[18px] px-8 rounded-[28px] items-center justify-center shadow-md"
             activeOpacity={0.8}
-            onPress={() => router.push("/(auth)/register")}
+            onPress={() => router.push("/(employee)")}
           >
             <MaskedView
               maskElement={

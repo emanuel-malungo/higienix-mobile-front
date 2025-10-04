@@ -323,7 +323,7 @@ export default function EmployeeSchedulePage() {
       <View className="flex-row items-center justify-between mb-3">
         <View className="flex-row items-center flex-1">
           <View className="w-10 h-10 bg-gradient-to-r from-[#65BF7A] to-[#39B2A7] rounded-xl items-center justify-center mr-3">
-            <Feather name={item.icon as any} size={18} color="#FFFFFF" />
+            <Feather name={item.icon as any} size={18} />
           </View>
           <View className="flex-1">
             <Text className="text-gray-800 text-sm font-bold" numberOfLines={1}>
@@ -358,17 +358,17 @@ export default function EmployeeSchedulePage() {
       {/* Informações do cliente */}
       <View className="mb-3">
         <Text className="text-gray-800 text-sm font-semibold mb-1">
-          👤 {item.clientName}
+          {item.clientName}
         </Text>
         <Text className="text-gray-600 text-xs" numberOfLines={1}>
-          📍 {item.address}
+          {item.address}
         </Text>
       </View>
 
       {/* Preço e duração */}
       <View className="flex-row items-center justify-between">
         <Text className="text-gray-600 text-xs">
-          ⏱️ {item.estimatedDuration}
+          {item.estimatedDuration}
         </Text>
         <Text className="text-[#39B2A7] text-sm font-bold">
           R$ {item.price}
@@ -377,7 +377,7 @@ export default function EmployeeSchedulePage() {
 
       {/* Botões de ação para pedidos pendentes */}
       {item.canAcceptDecline && item.status === "pending" && (
-        <View className="flex-row space-x-2 mt-3 pt-3 border-t border-gray-200">
+        <View className="flex-row gap-2 mt-3 pt-3 border-t border-gray-200">
           <TouchableOpacity
             onPress={() => declineEvent(item.id)}
             className="flex-1 bg-red-100 p-2 rounded-lg"
@@ -435,7 +435,7 @@ export default function EmployeeSchedulePage() {
             <View className="flex-row items-center justify-between mb-4">
               <View className="flex-1">
                 <Text className="text-white text-2xl font-bold mb-1">
-                  Minha Agenda 📅
+                  Minha Agenda
                 </Text>
                 <Text className="text-white/80 text-sm">
                   Gerencie seus compromissos
@@ -616,21 +616,21 @@ export default function EmployeeSchedulePage() {
                       </Text>
                     </View>
                     
-                    <View className="space-y-2">
+                    <View className="gap-2">
                       <Text className="text-gray-600 text-sm">
-                        👤 Cliente: {selectedEvent.clientName}
+                        Cliente: {selectedEvent.clientName}
                       </Text>
                       <Text className="text-gray-600 text-sm">
-                        📞 Telefone: {selectedEvent.clientPhone}
+                        Telefone: {selectedEvent.clientPhone}
                       </Text>
                       <Text className="text-gray-600 text-sm">
-                        📍 Local: {selectedEvent.address}
+                        Local: {selectedEvent.address}
                       </Text>
                       <Text className="text-gray-600 text-sm">
-                        🕐 Horário: {selectedEvent.time} - {selectedEvent.endTime}
+                        Horário: {selectedEvent.time} - {selectedEvent.endTime}
                       </Text>
                       <Text className="text-gray-600 text-sm">
-                        ⏱️ Duração: {selectedEvent.estimatedDuration}
+                        Duração: {selectedEvent.estimatedDuration}
                       </Text>
                     </View>
                   </View>
@@ -669,8 +669,8 @@ export default function EmployeeSchedulePage() {
                   </View>
 
                   {/* Ações */}
-                  <View className="space-y-3 mt-4">
-                    <View className="flex-row space-x-3">
+                  <View className="gap-3 mt-4">
+                    <View className="flex-row gap-3">
                       <TouchableOpacity className="flex-1 bg-blue-100 p-3 rounded-xl">
                         <View className="flex-row items-center justify-center">
                           <Feather name="phone" size={18} color="#2196F3" />
@@ -692,7 +692,7 @@ export default function EmployeeSchedulePage() {
 
                     {/* Botões de aceitar/recusar */}
                     {selectedEvent.canAcceptDecline && selectedEvent.status === "pending" && (
-                      <View className="flex-row space-x-3 pt-3 border-t border-gray-200">
+                      <View className="flex-row gap-3 pt-3 border-t border-gray-200">
                         <TouchableOpacity
                           onPress={() => declineEvent(selectedEvent.id)}
                           className="flex-1 bg-red-500 p-4 rounded-xl"

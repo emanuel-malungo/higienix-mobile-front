@@ -245,6 +245,7 @@ export default function ServiceExecutionPage() {
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
               className="p-4 rounded-2xl"
+              style={{ borderRadius: 24 }}
             >
               <View className="flex-row items-center justify-center">
                 <Feather name="play" size={24} color="#FFFFFF" />
@@ -259,7 +260,7 @@ export default function ServiceExecutionPage() {
       case "started":
       case "in_progress":
         return (
-          <View className="flex-row space-x-3 mb-6">
+          <View className="flex-row gap-3 mb-6">
             <TouchableOpacity
               onPress={handlePauseService}
               className="flex-1 bg-orange-500 p-4 rounded-2xl"
@@ -394,23 +395,23 @@ export default function ServiceExecutionPage() {
               </View>
               
               <View className="w-16 h-16 bg-gradient-to-r from-[#65BF7A] to-[#39B2A7] rounded-2xl items-center justify-center">
-                <Feather name={service.icon as any} size={28} color="#FFFFFF" />
+                <Feather name={service.icon as any} size={28} />
               </View>
             </View>
             
             {/* Informações do cliente */}
             <View className="bg-gray-50 rounded-2xl p-4">
               <Text className="text-gray-800 text-lg font-bold mb-2">
-                👤 {service.clientName}
+                {service.clientName}
               </Text>
               <Text className="text-gray-600 text-sm mb-2">
-                📞 {service.clientPhone}
+                {service.clientPhone}
               </Text>
               <Text className="text-gray-600 text-sm mb-2">
-                📍 {service.address}
+                {service.address}
               </Text>
               <Text className="text-gray-600 text-sm">
-                🕐 {service.date} às {service.time} | R$ {service.price}
+                {service.date} às {service.time} | R$ {service.price}
               </Text>
             </View>
           </View>
@@ -438,7 +439,7 @@ export default function ServiceExecutionPage() {
             </View>
             
             {/* Lista do checklist */}
-            <View className="space-y-3">
+            <View className="gap-3">
               {service.checklistItems.map((item) => (
                 <TouchableOpacity
                   key={item.id}
@@ -502,7 +503,7 @@ export default function ServiceExecutionPage() {
             
             <View>
               <Text className="text-gray-700 font-semibold mb-2">Materiais Necessários:</Text>
-              <View className="space-y-1">
+              <View className="gap-1">
                 {service.materials.map((material, index) => (
                   <Text key={index} className="text-gray-600 text-sm">
                     • {material}
@@ -518,7 +519,7 @@ export default function ServiceExecutionPage() {
               Ações Rápidas
             </Text>
             
-            <View className="flex-row space-x-3">
+            <View className="flex-row gap-3">
               <TouchableOpacity className="flex-1 bg-blue-100 p-4 rounded-xl">
                 <View className="items-center">
                   <Feather name="phone" size={20} color="#2196F3" />
@@ -574,7 +575,7 @@ export default function ServiceExecutionPage() {
                 numberOfLines={3}
               />
               
-              <View className="flex-row space-x-3">
+              <View className="flex-row gap-3">
                 <TouchableOpacity
                   onPress={() => setShowPauseModal(false)}
                   className="flex-1 bg-gray-200 p-4 rounded-xl"
@@ -626,7 +627,7 @@ export default function ServiceExecutionPage() {
                 numberOfLines={4}
               />
               
-              <View className="flex-row space-x-3">
+              <View className="flex-row gap-3">
                 <TouchableOpacity
                   onPress={() => setShowCompletionModal(false)}
                   className="flex-1 bg-gray-200 p-4 rounded-xl"
