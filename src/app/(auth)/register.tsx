@@ -4,7 +4,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
   ScrollView,
   KeyboardAvoidingView,
   Platform,
@@ -83,39 +82,42 @@ export default function Register() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}
+      className="flex-1 bg-white"
     >
       <ScrollView
-        contentContainerStyle={styles.scrollContent}
+        className="flex-grow px-6 pt-15 pb-8"
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
       >
         {/* Logo */}
-        <View style={styles.logoContainer}>
+        <View className="items-center mb-6">
           <Image
             source={require('../../assets/images/icon2.png')}
-            style={styles.logo}
+            className="w-20 h-20"
             resizeMode="contain"
           />
         </View>
 
         {/* Título */}
-        <Text style={styles.title}>Criar Conta</Text>
-        <Text style={styles.subtitle}>
+        <Text className="text-[28px] text-center text-slate-800 mb-2" style={{ fontFamily: 'Poppins_700Bold' }}>
+          Criar Conta
+        </Text>
+        <Text className="text-sm text-center text-slate-600 mb-8" style={{ fontFamily: 'Poppins_400Regular' }}>
           Preencha seus dados para começar
         </Text>
 
         {/* Form Fields */}
-        <View style={styles.formContainer}>
+        <View className="mb-6">
           {/* Full Name */}
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>
+          <View className="mb-5">
+            <Text className="text-sm font-bold text-slate-800 mb-2" style={{ fontFamily: 'Poppins_700Bold' }}>
               <Ionicons name="person-outline" size={16} color="#64748B" /> Nome Completo
             </Text>
-            <View style={styles.inputContainer}>
+            <View className="flex-row items-center bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3.5 gap-3">
               <Ionicons name="person-outline" size={20} color="#64748B" />
               <TextInput
-                style={styles.input}
+                className="flex-1 text-base text-slate-800"
+                style={{ fontFamily: 'Poppins_400Regular' }}
                 placeholder="Seu nome completo"
                 value={fullName}
                 onChangeText={setFullName}
@@ -127,14 +129,15 @@ export default function Register() {
           </View>
 
           {/* Email */}
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>
+          <View className="mb-5">
+            <Text className="text-sm font-bold text-slate-800 mb-2" style={{ fontFamily: 'Poppins_700Bold' }}>
               <Ionicons name="mail-outline" size={16} color="#64748B" /> Email
             </Text>
-            <View style={styles.inputContainer}>
+            <View className="flex-row items-center bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3.5 gap-3">
               <Ionicons name="mail-outline" size={20} color="#64748B" />
               <TextInput
-                style={styles.input}
+                className="flex-1 text-base text-slate-800"
+                style={{ fontFamily: 'Poppins_400Regular' }}
                 placeholder="seu@email.com"
                 value={email}
                 onChangeText={setEmail}
@@ -147,14 +150,15 @@ export default function Register() {
           </View>
 
           {/* Phone */}
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>
+          <View className="mb-5">
+            <Text className="text-sm font-bold text-slate-800 mb-2" style={{ fontFamily: 'Poppins_700Bold' }}>
               <Ionicons name="call-outline" size={16} color="#64748B" /> Telefone
             </Text>
-            <View style={styles.inputContainer}>
+            <View className="flex-row items-center bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3.5 gap-3">
               <Ionicons name="call-outline" size={20} color="#64748B" />
               <TextInput
-                style={styles.input}
+                className="flex-1 text-base text-slate-800"
+                style={{ fontFamily: 'Poppins_400Regular' }}
                 placeholder="(00) 00000-0000"
                 value={phone}
                 onChangeText={setPhone}
@@ -166,14 +170,15 @@ export default function Register() {
           </View>
 
           {/* Password */}
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>
+          <View className="mb-5">
+            <Text className="text-sm font-bold text-slate-800 mb-2" style={{ fontFamily: 'Poppins_700Bold' }}>
               <Ionicons name="lock-closed-outline" size={16} color="#64748B" /> Senha
             </Text>
-            <View style={styles.inputContainer}>
+            <View className="flex-row items-center bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3.5 gap-3">
               <Ionicons name="lock-closed-outline" size={20} color="#64748B" />
               <TextInput
-                style={styles.input}
+                className="flex-1 text-base text-slate-800"
+                style={{ fontFamily: 'Poppins_400Regular' }}
                 placeholder="••••••••"
                 value={password}
                 onChangeText={setPassword}
@@ -189,18 +194,21 @@ export default function Register() {
                 />
               </TouchableOpacity>
             </View>
-            <Text style={styles.hint}>Mínimo de 6 caracteres</Text>
+            <Text className="text-xs text-slate-600 mt-1 ml-1" style={{ fontFamily: 'Poppins_400Regular' }}>
+              Mínimo de 6 caracteres
+            </Text>
           </View>
 
           {/* Confirm Password */}
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>
+          <View className="mb-5">
+            <Text className="text-sm font-bold text-slate-800 mb-2" style={{ fontFamily: 'Poppins_700Bold' }}>
               <Ionicons name="lock-closed-outline" size={16} color="#64748B" /> Confirmar Senha
             </Text>
-            <View style={styles.inputContainer}>
+            <View className="flex-row items-center bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3.5 gap-3">
               <Ionicons name="lock-closed-outline" size={20} color="#64748B" />
               <TextInput
-                style={styles.input}
+                className="flex-1 text-base text-slate-800"
+                style={{ fontFamily: 'Poppins_400Regular' }}
                 placeholder="••••••••"
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
@@ -220,25 +228,31 @@ export default function Register() {
 
           {/* Terms and Conditions */}
           <TouchableOpacity
-            style={styles.checkboxContainer}
+            className="flex-row items-center mt-2"
             onPress={() => setAcceptTerms(!acceptTerms)}
             activeOpacity={0.8}
           >
-            <View style={[styles.checkbox, acceptTerms && styles.checkboxChecked]}>
+            <View className={`w-6 h-6 border-2 border-slate-200 rounded-lg mr-3 items-center justify-center ${
+              acceptTerms ? 'bg-teal-600 border-teal-600' : ''
+            }`}>
               {acceptTerms && <Ionicons name="checkmark" size={16} color="#FFFFFF" />}
             </View>
-            <Text style={styles.checkboxText}>
+            <Text className="flex-1 text-xs text-slate-600 leading-[18px]" style={{ fontFamily: 'Poppins_400Regular' }}>
               Aceito os{' '}
-              <Text style={styles.linkText}>Termos de Uso</Text>
+              <Text className="text-teal-600 font-bold" style={{ fontFamily: 'Poppins_700Bold' }}>
+                Termos de Uso
+              </Text>
               {' '}e{' '}
-              <Text style={styles.linkText}>Política de Privacidade</Text>
+              <Text className="text-teal-600 font-bold" style={{ fontFamily: 'Poppins_700Bold' }}>
+                Política de Privacidade
+              </Text>
             </Text>
           </TouchableOpacity>
         </View>
 
         {/* Register Button */}
         <TouchableOpacity
-          style={styles.button}
+          className="w-full rounded-[28px] overflow-hidden shadow-lg mb-6"
           onPress={handleRegister}
           disabled={loading}
           activeOpacity={0.8}
@@ -247,27 +261,33 @@ export default function Register() {
             colors={['#65BF7A', '#39B2A7', '#3290CD']}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
-            style={styles.gradientButton}
+            className="py-[18px] px-8 items-center justify-center"
           >
             {loading ? (
-              <Text style={styles.buttonText}>CRIANDO CONTA...</Text>
+              <Text className="text-white text-base font-bold tracking-wider" style={{ fontFamily: 'Poppins_700Bold' }}>
+                CRIANDO CONTA...
+              </Text>
             ) : (
-              <Text style={styles.buttonText}>CRIAR CONTA</Text>
+              <Text className="text-white text-base font-bold tracking-wider" style={{ fontFamily: 'Poppins_700Bold' }}>
+                CRIAR CONTA
+              </Text>
             )}
           </LinearGradient>
         </TouchableOpacity>
 
         {/* Divider */}
-        <View style={styles.dividerContainer}>
-          <View style={styles.divider} />
-          <Text style={styles.dividerText}>ou cadastre-se com</Text>
-          <View style={styles.divider} />
+        <View className="flex-row items-center my-6">
+          <View className="flex-1 h-px bg-slate-200" />
+          <Text className="text-xs text-slate-600 mx-4" style={{ fontFamily: 'Poppins_400Regular' }}>
+            ou cadastre-se com
+          </Text>
+          <View className="flex-1 h-px bg-slate-200" />
         </View>
 
         {/* Social Register Buttons */}
-        <View style={styles.socialContainer}>
+        <View className="flex-row justify-center gap-4 mb-8">
           <TouchableOpacity
-            style={styles.socialButton}
+            className="w-14 h-14 bg-slate-50 border border-slate-200 rounded-2xl items-center justify-center shadow-sm"
             onPress={() => handleSocialRegister('Google')}
             activeOpacity={0.8}
           >
@@ -275,7 +295,7 @@ export default function Register() {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.socialButton}
+            className="w-14 h-14 bg-slate-50 border border-slate-200 rounded-2xl items-center justify-center shadow-sm"
             onPress={() => handleSocialRegister('Facebook')}
             activeOpacity={0.8}
           >
@@ -283,7 +303,7 @@ export default function Register() {
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.socialButton}
+            className="w-14 h-14 bg-slate-50 border border-slate-200 rounded-2xl items-center justify-center shadow-sm"
             onPress={() => handleSocialRegister('Apple')}
             activeOpacity={0.8}
           >
@@ -292,13 +312,17 @@ export default function Register() {
         </View>
 
         {/* Login Link */}
-        <View style={styles.loginContainer}>
-          <Text style={styles.loginText}>Já tem uma conta? </Text>
+        <View className="flex-row justify-center items-center">
+          <Text className="text-sm text-slate-600" style={{ fontFamily: 'Poppins_400Regular' }}>
+            Já tem uma conta?{' '}
+          </Text>
           <Link href="/(auth)" asChild>
             <TouchableOpacity>
               <MaskedView
                 maskElement={
-                  <Text style={styles.loginLink}>Entrar</Text>
+                  <Text className="text-sm font-bold" style={{ fontFamily: 'Poppins_700Bold' }}>
+                    Entrar
+                  </Text>
                 }
               >
                 <LinearGradient
@@ -306,7 +330,7 @@ export default function Register() {
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 0 }}
                 >
-                  <Text style={[styles.loginLink, { opacity: 0 }]}>
+                  <Text className="text-sm font-bold opacity-0" style={{ fontFamily: 'Poppins_700Bold' }}>
                     Entrar
                   </Text>
                 </LinearGradient>
@@ -318,178 +342,3 @@ export default function Register() {
     </KeyboardAvoidingView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-  },
-  scrollContent: {
-    flexGrow: 1,
-    paddingHorizontal: 24,
-    paddingTop: 60,
-    paddingBottom: 32,
-  },
-  logoContainer: {
-    alignItems: 'center',
-    marginBottom: 24,
-  },
-  logo: {
-    width: 80,
-    height: 80,
-  },
-  title: {
-    fontSize: 28,
-    fontFamily: 'Poppins_700Bold',
-    color: '#1E293B',
-    textAlign: 'center',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 14,
-    fontFamily: 'Poppins_400Regular',
-    color: '#64748B',
-    textAlign: 'center',
-    marginBottom: 32,
-  },
-  formContainer: {
-    marginBottom: 24,
-  },
-  inputGroup: {
-    marginBottom: 20,
-  },
-  label: {
-    fontSize: 14,
-    fontFamily: 'Poppins_700Bold',
-    color: '#1E293B',
-    marginBottom: 8,
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#F8FAFC',
-    borderWidth: 1,
-    borderColor: '#E2E8F0',
-    borderRadius: 16,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    gap: 12,
-  },
-  input: {
-    flex: 1,
-    fontSize: 16,
-    fontFamily: 'Poppins_400Regular',
-    color: '#1E293B',
-  },
-  hint: {
-    fontSize: 12,
-    fontFamily: 'Poppins_400Regular',
-    color: '#64748B',
-    marginTop: 4,
-    marginLeft: 4,
-  },
-  checkboxContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 8,
-  },
-  checkbox: {
-    width: 24,
-    height: 24,
-    borderWidth: 2,
-    borderColor: '#E2E8F0',
-    borderRadius: 8,
-    marginRight: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  checkboxChecked: {
-    backgroundColor: '#39B2A7',
-    borderColor: '#39B2A7',
-  },
-  checkboxText: {
-    flex: 1,
-    fontSize: 12,
-    fontFamily: 'Poppins_400Regular',
-    color: '#64748B',
-    lineHeight: 18,
-  },
-  linkText: {
-    color: '#39B2A7',
-    fontFamily: 'Poppins_700Bold',
-  },
-  button: {
-    width: '100%',
-    borderRadius: 28,
-    overflow: 'hidden',
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-    marginBottom: 24,
-  },
-  gradientButton: {
-    paddingVertical: 18,
-    paddingHorizontal: 32,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontFamily: 'Poppins_700Bold',
-    letterSpacing: 1,
-  },
-  dividerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 24,
-  },
-  divider: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#E2E8F0',
-  },
-  dividerText: {
-    fontSize: 12,
-    fontFamily: 'Poppins_400Regular',
-    color: '#64748B',
-    marginHorizontal: 16,
-  },
-  socialContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 16,
-    marginBottom: 32,
-  },
-  socialButton: {
-    width: 56,
-    height: 56,
-    backgroundColor: '#F8FAFC',
-    borderWidth: 1,
-    borderColor: '#E2E8F0',
-    borderRadius: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-  loginContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loginText: {
-    fontSize: 14,
-    fontFamily: 'Poppins_400Regular',
-    color: '#64748B',
-  },
-  loginLink: {
-    fontSize: 14,
-    fontFamily: 'Poppins_700Bold',
-  },
-});

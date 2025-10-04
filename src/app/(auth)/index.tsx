@@ -1,464 +1,208 @@
-import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
-  Image,
-  Alert,
-} from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import MaskedView from '@react-native-masked-view/masked-view';
-import { Ionicons } from '@expo/vector-icons';
-import { Link, useRouter } from 'expo-router';
+import { useState } from "react";
+import { router } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
+import { useForm, Controller } from "react-hook-form";
+import { loginSchema } from "@/utils/authValidation";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Text, View, TouchableOpacity, StatusBar, Dimensions } from "react-native";
+import { useAuth } from "@/context/AuthContext";
+import { Feather } from "@expo/vector-icons";
 
-type LoginMethod = 'email' | 'phone';
+import Input from "@/components/Input";
+import Button from "@/components/Button";
+import AuthModal from "@/components/AuthModal";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function Login() {
-  const router = useRouter();
-  const [loginMethod, setLoginMethod] = useState<LoginMethod>('email');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
+const { width, height } = Dimensions.get('window');
 
-  const handleLogin = async () => {
-    if (loginMethod === 'email' && (!email || !password)) {
-      Alert.alert('Erro', 'Por favor, preencha email e senha');
-      return;
-    }
-    if (loginMethod === 'phone' && (!phone || !password)) {
-      Alert.alert('Erro', 'Por favor, preencha telefone e senha');
-      return;
-    }
+import { Image } from 'react-native';
 
-    setLoading(true);
-    // Simular login
-    setTimeout(() => {
-      setLoading(false);
-      Alert.alert('Sucesso', 'Login realizado com sucesso!');
-      // router.push('/(client)');
-    }, 1500);
-  };
+import icon from '../../assets/images/icon2.png';
 
-  const handleSocialLogin = (provider: string) => {
-    Alert.alert('Login Social', `Login com ${provider} em desenvolvimento`);
-  };
-
-  return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}
-    >
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled"
-      >
-        {/* Logo */}
-        <View style={styles.logoContainer}>
-          <Image
-            source={require('../../assets/images/icon2.png')}
-            style={styles.logo}
-            resizeMode="contain"
-          />
-        </View>
-
-        {/* Título */}
-        <Text style={styles.title}>Bem-vindo de volta!</Text>
-        <Text style={styles.subtitle}>
-          Entre com suas credenciais para acessar
-        </Text>
-
-        {/* Toggle Login Method */}
-        <View style={styles.toggleContainer}>
-          <TouchableOpacity
-            style={[
-              styles.toggleButton,
-              loginMethod === 'email' && styles.toggleButtonActive,
-            ]}
-            onPress={() => setLoginMethod('email')}
-            activeOpacity={0.8}
-          >
-            <Ionicons
-              name="mail-outline"
-              size={20}
-              color={loginMethod === 'email' ? '#FFFFFF' : '#64748B'}
-            />
-            <Text
-              style={[
-                styles.toggleText,
-                loginMethod === 'email' && styles.toggleTextActive,
-              ]}
-            >
-              Email
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[
-              styles.toggleButton,
-              loginMethod === 'phone' && styles.toggleButtonActive,
-            ]}
-            onPress={() => setLoginMethod('phone')}
-            activeOpacity={0.8}
-          >
-            <Ionicons
-              name="call-outline"
-              size={20}
-              color={loginMethod === 'phone' ? '#FFFFFF' : '#64748B'}
-            />
-            <Text
-              style={[
-                styles.toggleText,
-                loginMethod === 'phone' && styles.toggleTextActive,
-              ]}
-            >
-              Telefone
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Form Fields */}
-        <View style={styles.formContainer}>
-          {/* Email or Phone Input */}
-          {loginMethod === 'email' ? (
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>
-                <Ionicons name="mail-outline" size={16} color="#64748B" /> Email
-              </Text>
-              <View style={styles.inputContainer}>
-                <Ionicons name="mail-outline" size={20} color="#64748B" />
-                <TextInput
-                  style={styles.input}
-                  placeholder="seu@email.com"
-                  value={email}
-                  onChangeText={setEmail}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                  autoComplete="email"
-                  placeholderTextColor="#94A3B8"
-                />
-              </View>
-            </View>
-          ) : (
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>
-                <Ionicons name="call-outline" size={16} color="#64748B" /> Telefone
-              </Text>
-              <View style={styles.inputContainer}>
-                <Ionicons name="call-outline" size={20} color="#64748B" />
-                <TextInput
-                  style={styles.input}
-                  placeholder="(00) 00000-0000"
-                  value={phone}
-                  onChangeText={setPhone}
-                  keyboardType="phone-pad"
-                  autoComplete="tel"
-                  placeholderTextColor="#94A3B8"
-                />
-              </View>
-            </View>
-          )}
-
-          {/* Password Input */}
-          <View style={styles.inputGroup}>
-            <Text style={styles.label}>
-              <Ionicons name="lock-closed-outline" size={16} color="#64748B" /> Senha
-            </Text>
-            <View style={styles.inputContainer}>
-              <Ionicons name="lock-closed-outline" size={20} color="#64748B" />
-              <TextInput
-                style={styles.input}
-                placeholder="••••••••"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry={!showPassword}
-                autoComplete="password"
-                placeholderTextColor="#94A3B8"
-              />
-              <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                <Ionicons
-                  name={showPassword ? 'eye-outline' : 'eye-off-outline'}
-                  size={20}
-                  color="#64748B"
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          {/* Forgot Password Link */}
-          <Link href="/(auth)/forgot-password" asChild>
-            <TouchableOpacity style={styles.forgotPassword}>
-              <Text style={styles.forgotPasswordText}>Esqueceu a senha?</Text>
-            </TouchableOpacity>
-          </Link>
-        </View>
-
-        {/* Login Button */}
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleLogin}
-          disabled={loading}
-          activeOpacity={0.8}
-        >
-          <LinearGradient
-            colors={['#65BF7A', '#39B2A7', '#3290CD']}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            style={styles.gradientButton}
-          >
-            {loading ? (
-              <Text style={styles.buttonText}>ENTRANDO...</Text>
-            ) : (
-              <Text style={styles.buttonText}>ENTRAR</Text>
-            )}
-          </LinearGradient>
-        </TouchableOpacity>
-
-        {/* Divider */}
-        <View style={styles.dividerContainer}>
-          <View style={styles.divider} />
-          <Text style={styles.dividerText}>ou continue com</Text>
-          <View style={styles.divider} />
-        </View>
-
-        {/* Social Login Buttons */}
-        <View style={styles.socialContainer}>
-          <TouchableOpacity
-            style={styles.socialButton}
-            onPress={() => handleSocialLogin('Google')}
-            activeOpacity={0.8}
-          >
-            <Ionicons name="logo-google" size={24} color="#DB4437" />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.socialButton}
-            onPress={() => handleSocialLogin('Facebook')}
-            activeOpacity={0.8}
-          >
-            <Ionicons name="logo-facebook" size={24} color="#4267B2" />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.socialButton}
-            onPress={() => handleSocialLogin('Apple')}
-            activeOpacity={0.8}
-          >
-            <Ionicons name="logo-apple" size={24} color="#000000" />
-          </TouchableOpacity>
-        </View>
-
-        {/* Register Link */}
-        <View style={styles.registerContainer}>
-          <Text style={styles.registerText}>Não tem uma conta? </Text>
-          <Link href="/(auth)/register" asChild>
-            <TouchableOpacity>
-              <MaskedView
-                maskElement={
-                  <Text style={styles.registerLink}>Criar conta</Text>
-                }
-              >
-                <LinearGradient
-                  colors={['#65BF7A', '#39B2A7', '#3290CD']}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 0 }}
-                >
-                  <Text style={[styles.registerLink, { opacity: 0 }]}>
-                    Criar conta
-                  </Text>
-                </LinearGradient>
-              </MaskedView>
-            </TouchableOpacity>
-          </Link>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
-  );
+interface LoginForm {
+    email: string;
+    password: string;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-  },
-  scrollContent: {
-    flexGrow: 1,
-    paddingHorizontal: 24,
-    paddingTop: 60,
-    paddingBottom: 32,
-  },
-  logoContainer: {
-    alignItems: 'center',
-    marginBottom: 32,
-  },
-  logo: {
-    width: 100,
-    height: 100,
-  },
-  title: {
-    fontSize: 28,
-    fontFamily: 'Poppins_700Bold',
-    color: '#1E293B',
-    textAlign: 'center',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 14,
-    fontFamily: 'Poppins_400Regular',
-    color: '#64748B',
-    textAlign: 'center',
-    marginBottom: 32,
-  },
-  toggleContainer: {
-    flexDirection: 'row',
-    backgroundColor: '#F1F5F9',
-    borderRadius: 16,
-    padding: 4,
-    marginBottom: 24,
-  },
-  toggleButton: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderRadius: 12,
-    gap: 8,
-  },
-  toggleButtonActive: {
-    backgroundColor: '#FFFFFF',
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-  toggleText: {
-    fontSize: 14,
-    fontFamily: 'Poppins_700Bold',
-    color: '#64748B',
-  },
-  toggleTextActive: {
-    color: '#39B2A7',
-  },
-  formContainer: {
-    marginBottom: 24,
-  },
-  inputGroup: {
-    marginBottom: 20,
-  },
-  label: {
-    fontSize: 14,
-    fontFamily: 'Poppins_700Bold',
-    color: '#1E293B',
-    marginBottom: 8,
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#F8FAFC',
-    borderWidth: 1,
-    borderColor: '#E2E8F0',
-    borderRadius: 16,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    gap: 12,
-  },
-  input: {
-    flex: 1,
-    fontSize: 16,
-    fontFamily: 'Poppins_400Regular',
-    color: '#1E293B',
-  },
-  forgotPassword: {
-    alignSelf: 'flex-end',
-    marginTop: 8,
-  },
-  forgotPasswordText: {
-    fontSize: 14,
-    fontFamily: 'Poppins_700Bold',
-    color: '#39B2A7',
-  },
-  button: {
-    width: '100%',
-    borderRadius: 28,
-    overflow: 'hidden',
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-    marginBottom: 24,
-  },
-  gradientButton: {
-    paddingVertical: 18,
-    paddingHorizontal: 32,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontFamily: 'Poppins_700Bold',
-    letterSpacing: 1,
-  },
-  dividerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 24,
-  },
-  divider: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#E2E8F0',
-  },
-  dividerText: {
-    fontSize: 12,
-    fontFamily: 'Poppins_400Regular',
-    color: '#64748B',
-    marginHorizontal: 16,
-  },
-  socialContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 16,
-    marginBottom: 32,
-  },
-  socialButton: {
-    width: 56,
-    height: 56,
-    backgroundColor: '#F8FAFC',
-    borderWidth: 1,
-    borderColor: '#E2E8F0',
-    borderRadius: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-  registerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  registerText: {
-    fontSize: 14,
-    fontFamily: 'Poppins_400Regular',
-    color: '#64748B',
-  },
-  registerLink: {
-    fontSize: 14,
-    fontFamily: 'Poppins_700Bold',
-  },
-});
+export default function Login() {
+    const [loading, setLoading] = useState(false);
+    const [successModalVisible, setSuccessModalVisible] = useState(false);
+    const [warningModalVisible, setWarningModalVisible] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const { login } = useAuth();
+
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<LoginForm>({
+        resolver: yupResolver(loginSchema),
+        mode: "onBlur",
+    });
+
+    const onSubmit = async (data: LoginForm) => {
+        setLoading(true);
+        try {
+            await login(data.email, data.password);
+            setSuccessModalVisible(true);
+            setTimeout(() => {
+                router.replace("/(client)");
+            }, 2000);
+        } catch (error: unknown) {
+            let message = "Ocorreu um erro. Verifique suas credenciais e tente novamente.";
+
+            if (error instanceof Error) {
+                const errorCode = (error as any).code;
+                switch (errorCode) {
+                    case "auth/invalid-email":
+                        message = "E-mail inválido.";
+                        break;
+                    case "auth/user-not-found":
+                        message = "Usuário não encontrado.";
+                        break;
+                    case "auth/wrong-password":
+                        message = "Senha incorreta.";
+                        break;
+                    case "auth/invalid-credential":
+                        message = "Credenciais inválidas.";
+                        break;
+                    default:
+                        message = error.message;
+                }
+            }
+            setErrorMessage(message);
+            setWarningModalVisible(true);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <SafeAreaView className="flex-1">
+            {/* Gradient Background */}
+            <LinearGradient 
+                colors={["#65BF7A", "#39B2A7", "#3290CD"]} 
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                className="flex-1 w-full"
+            >
+                <StatusBar barStyle="light-content" backgroundColor="#65BF7A" />
+                
+                {/* Floating Shapes for Modern Design */}
+                <View className="absolute top-20 right-10 w-20 h-20 rounded-full bg-white/10" />
+                <View className="absolute top-40 left-8 w-12 h-12 rounded-full bg-white/5" />
+                <View className="absolute bottom-60 right-20 w-16 h-16 rounded-full bg-white/10" />
+                
+                <View className="flex-1 justify-center px-6">
+                    {/* Header Section */}
+                    <View className="items-center mb-12">
+                    
+                        <Image source={icon} className="" />
+                  
+                        <Text className="text-white text-3xl font-bold mb-3 text-center">
+                            Bem-vindo ao Higienix
+                        </Text>
+                        <Text className="text-white/80 text-base text-center leading-6">
+                            Sua plataforma de limpeza profissional{"\n"}
+                            Faça login para continuar
+                        </Text>
+                    </View>
+
+                    {/* Login Card */}
+                    <View className="bg-white/95 backdrop-blur-lg rounded-3xl p-6 mx-2 shadow-2xl border border-white/20">
+                        <View className="items-center mb-6">
+                            <View className="w-12 h-1 bg-gradient-to-r from-[#65BF7A] to-[#39B2A7] rounded-full" />
+                        </View>
+
+                        <Controller
+                            control={control}
+                            name="email"
+                            render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => (
+                                <Input
+                                    placeholder="Digite seu e-mail"
+                                    keyboardType="email-address"
+                                    onChangeText={onChange}
+                                    onBlur={onBlur}
+                                    value={value}
+                                    error={error?.message}
+                                    nameIcon="mail"
+                                />
+                            )}
+                        />
+                        
+                        <Controller
+                            control={control}
+                            name="password"
+                            render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => (
+                                <Input
+                                    placeholder="Digite sua senha"
+                                    secureTextEntry
+                                    onChangeText={onChange}
+                                    onBlur={onBlur}
+                                    value={value}
+                                    error={error?.message}
+                                    nameIcon="lock"
+                                    className="mt-4"
+                                />
+                            )}
+                        />
+                        
+                        <TouchableOpacity 
+                            onPress={() => router.push("/(auth)/forgot-password")}
+                            className="self-end mt-3 mb-6"
+                        >
+                            <Text className="text-[#39B2A7] font-semibold text-sm">
+                                Esqueceu a senha?
+                            </Text>
+                        </TouchableOpacity>
+
+                        <Button 
+                            title="Entrar" 
+                            onPress={handleSubmit(onSubmit)} 
+                            disabled={loading} 
+                            loading={loading} 
+                        />
+                    </View>
+
+                    {/* Register Link */}
+                    <View className="flex-row justify-center mt-8 px-4">
+                        <Text className="text-white/80 text-base">Não tem uma conta? </Text>
+                        <TouchableOpacity onPress={() => router.push("/(auth)/register")}>
+                            <Text className="text-white font-bold text-base underline">
+                                Cadastre-se
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    {/* Footer */}
+                    <View className="items-center mt-8 mb-4">
+                        <Text className="text-white/60 text-xs text-center">
+                            © 2025 Higienix. Todos os direitos reservados.
+                        </Text>
+                    </View>
+                </View>
+
+                <AuthModal
+                    visible={successModalVisible}
+                    type="success"
+                    title="Sucesso!"
+                    message="Login efetuado com sucesso!"
+                    primaryButtonText="Ok"
+                    onPrimaryButtonPress={() => setSuccessModalVisible(false)}
+                    onClose={() => setSuccessModalVisible(false)}
+                />
+
+                <AuthModal
+                    visible={warningModalVisible}
+                    type="warning"
+                    title="Erro no login"
+                    message={errorMessage}
+                    primaryButtonText="Ok"
+                    onPrimaryButtonPress={() => setWarningModalVisible(false)}
+                    onClose={() => setWarningModalVisible(false)}
+                />
+            </LinearGradient>
+        </SafeAreaView>
+    );
+}
