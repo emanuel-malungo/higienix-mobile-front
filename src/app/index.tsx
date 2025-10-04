@@ -49,7 +49,7 @@ export default function Onboarding() {
           <TouchableOpacity 
             className="w-full rounded-[28px] overflow-hidden shadow-lg"
             activeOpacity={0.8}
-            onPress={() => router.push("/(auth)")}
+            onPress={() => router.push("/(client)")}
           >
             <LinearGradient
               colors={["#65BF7A", "#39B2A7", "#3290CD"]}
