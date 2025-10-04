@@ -62,12 +62,14 @@ export default function ClientLayout() {
           tabBarIcon: ({ color, focused }) => (
             <View style={{ 
               padding: 6, 
-              borderRadius: 12, 
+              borderRadius: 12,
+              width: 42,
+              height: 42,
               backgroundColor: focused ? 'rgba(255,255,255,0.2)' : 'transparent',
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-              <Feather name="home" size={16} color={color} />
+              <Feather name="home" size={20} color={color} />
             </View>
           ),
         }}
@@ -79,12 +81,14 @@ export default function ClientLayout() {
           tabBarIcon: ({ color, focused }) => (
             <View style={{ 
               padding: 6, 
-              borderRadius: 12, 
+              borderRadius: 12,
+              width: 42,
+              height: 42,
               backgroundColor: focused ? 'rgba(255,255,255,0.2)' : 'transparent',
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-              <Feather name="clipboard" size={16} color={color} />
+              <Feather name="clipboard" size={20} color={color} />
             </View>
           ),
         }}
@@ -96,12 +100,14 @@ export default function ClientLayout() {
           tabBarIcon: ({ color, focused }) => (
             <View style={{ 
               padding: 6, 
-              borderRadius: 12, 
+              borderRadius: 12,
+              width: 42,
+              height: 42, 
               backgroundColor: focused ? 'rgba(255,255,255,0.2)' : 'transparent',
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-              <Feather name="plus-circle" size={16} color={color} />
+              <Feather name="plus-circle" size={20} color={color} />
             </View>
           ),
         }}
@@ -113,12 +119,14 @@ export default function ClientLayout() {
           tabBarIcon: ({ color, focused }) => (
             <View style={{ 
               padding: 6, 
-              borderRadius: 12, 
+              borderRadius: 12,
+               width: 42,
+              height: 42,
               backgroundColor: focused ? 'rgba(255,255,255,0.2)' : 'transparent',
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-              <Feather name="user" size={16} color={color} />
+              <Feather name="user" size={20} color={color} />
             </View>
           ),
         }}
