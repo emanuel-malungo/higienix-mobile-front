@@ -113,7 +113,7 @@ export default function EmployeeLayout() {
         }}
       />
       <Tabs.Screen 
-        name="settings" 
+        name="profile" 
         options={{
           title: "Perfil",
           tabBarIcon: ({ color, focused }) => (
