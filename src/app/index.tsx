@@ -1,26 +1,27 @@
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
-import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { router } from "expo-router";
+import { Image, ImageBackground, Text, TouchableOpacity, View } from "react-native";
 
 export default function Onboarding() {
   return (
     <ImageBackground
-      style={styles.background}
+      className="flex-1 justify-center items-center"
       source={require("../assets/images/background-onboarding.png")}
       resizeMode="cover"
     >
-      <View style={styles.container}>
+      <View className="flex-1 justify-center items-center w-full px-6">
         {/* Logo */}
         <Image
           source={require("../assets/images/icon2.png")}
-          style={styles.logo}
+          className="w-[180px] h-[120px] mb-8"
           resizeMode="contain"
         />
         
         {/* Título com gradiente */}
         <MaskedView
           maskElement={
-            <Text style={styles.title}>
+            <Text className="text-[32px] font-bold text-center mb-4 leading-[40px]" style={{ fontFamily: "Poppins_700Bold" }}>
               Agende sua limpeza {"\n"} em minutos
             </Text>
           }
@@ -30,32 +31,33 @@ export default function Onboarding() {
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
           >
-            <Text style={[styles.title, { opacity: 0 }]}>
+            <Text className="text-[32px] font-bold text-center mb-4 leading-[40px] opacity-0" style={{ fontFamily: "Poppins_700Bold" }}>
               Agende sua limpeza {"\n"} em minutos
             </Text>
           </LinearGradient>
         </MaskedView>
 
         {/* Subtítulo */}
-        <Text style={styles.subtitle}>
+        <Text className="text-base text-center text-white mb-12 leading-6 opacity-95" style={{ fontFamily: "Poppins_400Regular" }}>
           Prático, rápido e do jeito que {"\n"}
           você precisa.
         </Text>
 
         {/* Botões */}
-        <View style={styles.buttonsContainer}>
+        <View className="w-full gap-4">
           {/* Botão ENTRAR com gradiente */}
           <TouchableOpacity 
-            style={styles.button}
+            className="w-full rounded-[28px] overflow-hidden shadow-lg"
             activeOpacity={0.8}
+            onPress={() => router.push("/(auth)")}
           >
             <LinearGradient
               colors={["#65BF7A", "#39B2A7", "#3290CD"]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
-              style={styles.gradientButton}
+              className="py-[18px] px-8 items-center justify-center"
             >
-              <Text style={styles.buttonTextWhite}>
+              <Text className="text-white text-base font-bold tracking-wider" style={{ fontFamily: "Poppins_700Bold" }}>
                 ENTRAR
               </Text>
             </LinearGradient>
@@ -63,12 +65,13 @@ export default function Onboarding() {
 
           {/* Botão CRIAR CONTA com texto em gradiente e fundo branco */}
           <TouchableOpacity 
-            style={styles.buttonWhite}
+            className="w-full bg-white py-[18px] px-8 rounded-[28px] items-center justify-center shadow-md"
             activeOpacity={0.8}
+            onPress={() => router.push("/(auth)/register")}
           >
             <MaskedView
               maskElement={
-                <Text style={styles.buttonTextGradient}>
+                <Text className="text-base font-bold tracking-wider" style={{ fontFamily: "Poppins_700Bold" }}>
                   CRIAR CONTA
                 </Text>
               }
@@ -78,7 +81,7 @@ export default function Onboarding() {
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
               >
-                <Text style={[styles.buttonTextGradient, { opacity: 0 }]}>
+                <Text className="text-base font-bold tracking-wider opacity-0" style={{ fontFamily: "Poppins_700Bold" }}>
                   CRIAR CONTA
                 </Text>
               </LinearGradient>
@@ -89,84 +92,3 @@ export default function Onboarding() {
     </ImageBackground>
   );
 }
-
-const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    paddingHorizontal: 24,
-  },
-  logo: {
-    width: 180,
-    height: 120,
-    marginBottom: 32,
-  },
-  title: {
-    fontSize: 32,
-    fontFamily: "Poppins_700Bold",
-    textAlign: "center",
-    marginBottom: 16,
-    lineHeight: 40,
-  },
-  subtitle: {
-    fontSize: 16,
-    fontFamily: "Poppins_400Regular",
-    textAlign: "center",
-    color: "#FFFFFF",
-    marginBottom: 48,
-    lineHeight: 24,
-    opacity: 0.95,
-  },
-  buttonsContainer: {
-    width: "100%",
-    gap: 16,
-  },
-  button: {
-    width: "100%",
-    borderRadius: 28,
-    overflow: "hidden",
-    elevation: 4,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-  },
-  gradientButton: {
-    paddingVertical: 18,
-    paddingHorizontal: 32,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonWhite: {
-    width: "100%",
-    backgroundColor: "#FFFFFF",
-    paddingVertical: 18,
-    paddingHorizontal: 32,
-    borderRadius: 28,
-    alignItems: "center",
-    justifyContent: "center",
-    elevation: 4,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-  },
-  buttonTextWhite: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontFamily: "Poppins_700Bold",
-    letterSpacing: 1,
-  },
-  buttonTextGradient: {
-    fontSize: 16,
-    fontFamily: "Poppins_700Bold",
-    letterSpacing: 1,
-  },
-});
